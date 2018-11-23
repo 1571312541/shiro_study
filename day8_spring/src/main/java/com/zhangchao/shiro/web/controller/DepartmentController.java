@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
+    /**
+     *  在使用RequiresPermissions、PermissionName注解时，需要在springmvc配置文件中配置（001）
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("")
     @RequiresPermissions("department:list")
     @PermissionName("部门列表")

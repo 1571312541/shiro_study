@@ -4,7 +4,6 @@ import com.zhangchao.shiro.dao.IPermissionDAO;
 import com.zhangchao.shiro.dao.IRoleDAO;
 import com.zhangchao.shiro.dao.IUserDAO;
 import com.zhangchao.shiro.domain.User;
-import lombok.Setter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -15,22 +14,28 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class UserRealm extends AuthorizingRealm {
 
-    @Setter
+    @Resource
     private IUserDAO userDAO;
-    @Setter
+    @Resource
     private IRoleDAO roleDAO;
-    @Setter
+    @Resource
     private IPermissionDAO permissionDAO;
 
+    private static final Logger logger = LoggerFactory.getLogger(UserRealm.class);
     //认证操作
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        logger.info("=================认证操作===================");
         //从token中获取登录的用户名， 查询数据库返回用户信息
         String username = (String) token.getPrincipal();
         User user = userDAO.getUserByUsername(username);
@@ -54,10 +59,10 @@ public class UserRealm extends AuthorizingRealm {
     //授权操作
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-
+        logger.info("=================授权操作===================");
         User user = (User) principals.getPrimaryPrincipal();
 
-        List<String> permissions = new ArrayList<String>();
+        List<String> permissions = new ArrayList<>();
         List<String> roles = new ArrayList<>();
 
         if("admin".equals(user.getUsername())){

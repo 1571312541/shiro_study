@@ -1,36 +1,21 @@
 package com.zhangchao.shiro.web.controller;
 
 
-import com.zhangchao.shiro.dao.impl.UserDAOImpl;
-import com.zhangchao.shiro.domain.User;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
-    @Resource
-    private UserDAOImpl userDAO;
-    @RequestMapping("/login")
-    public String login(Model model, HttpServletResponse resp, HttpServletRequest req, String username, String password) throws  Exception{
-        if (username!=null){
-            User user = userDAO.getUserByUsername(username);
-            System.out.println("==========="+username);
-            System.out.println("==========="+password);
-            System.out.println("==========="+user);
-            if (user!=null){
-                req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
-            }else {
-                return "forward:/login.jsp";
-            }
-        }
-        return "forward:/login.jsp";
 
-        /*//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
+    @RequestMapping("/login")
+    public String login(Model model, HttpServletRequest req) throws  Exception{
+
+        //如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
         String exceptionClassName = (String) req.getAttribute("shiroLoginFailure");
         //根据shiro返回的异常类路径判断，抛出指定异常信息
         System.out.println(exceptionClassName);
@@ -50,7 +35,7 @@ public class LoginController {
         }
         //此方法不处理登陆成功（认证成功），shiro认证成功会自动跳转到上一个请求路径
         //登陆失败还到login页面
-        return "forward:/login.jsp";*/
+        return "forward:/login.jsp";
     }
 
 }

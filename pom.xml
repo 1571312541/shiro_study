@@ -9,17 +9,14 @@
   <packaging>pom</packaging>
   <version>0.1</version>
   <modules>
-    <module>day1</module>
-    <module>day2</module>
+      <module>day1</module>
+      <module>day2</module>
       <module>day3</module>
-    <module>day4</module>
-    <module>day5</module>
+      <module>day4</module>
+      <module>day5</module>
       <module>day6</module>
-    <module>day7</module>
-    <module>day8</module>
       <module>day7_web</module>
       <module>day8_spring</module>
-      <module>day9_spring_2</module>
   </modules>
 
   <name>shiro_study</name>

@@ -199,8 +199,8 @@
             <version>1.2.2</version>
         </dependency>
 
-
     </dependencies>
+
     <build>
         <finalName>day8_spring</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

@@ -14,9 +14,9 @@
 
 	<!--配置自定义的realm-->
 	<bean id="userRealm" class="com.zhangchao.shiro.realm.UserRealm">
-	<!--	&lt;!&ndash;密码需要加密：加密器&ndash;&gt;
+		<!--&lt;!&ndash;密码需要加密：加密器&ndash;&gt;-->
 		<property name="credentialsMatcher" ref="credentialsMatcher" />
-		<property name="userDAO" ref="userDAOImpl"></property>
+<!--		<property name="userDAO" ref="userDAOImpl"></property>
 		<property name="roleDAO" ref="roleDAOImpl"></property>
 		<property name="permissionDAO" ref="permissionDAOImpl"></property>-->
 	</bean>
@@ -32,8 +32,7 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager"/>
 		<property name="loginUrl" value="/login"/>
-		<property name="successUrl" value="/views/main.jsp"/>
-		<property name="unauthorizedUrl" value="/nopermission.jsp"/>
+		<property name="unauthorizedUrl" value="/nopermission.jsp"/> <!-- 要使该配置生效，需要下面配置（002） -->
 		<property name="filterChainDefinitions">
 			<value>
 				/logout=logout
@@ -42,7 +41,7 @@
 		</property>
 	</bean>
 
-
+<!--  ===================================（001）start=========================================================  -->
 	<!-- 开启aop，对类代理 -->
 	<aop:config proxy-target-class="true"></aop:config>
 	<!-- 开启shiro注解支持 -->
@@ -50,7 +49,9 @@
 		<property name="securityManager" ref="securityManager" />
 	</bean>
 
-	<!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常页名作为值 -->
+<!--  ==================================（001）end==========================================================  -->
+<!--  ===================================（002）start=========================================================  -->
+	 <!--定义需要特殊处理的异常，用类名或完全路径名作为key，异常页名作为值-->
 	<!--shiro权限异常处理-->
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
@@ -59,7 +60,7 @@
 			</props>
 		</property>
 	</bean>
-
+<!--  ==================================（002）end==========================================================  -->
 
 
 	<!-- 缓存管理器开始 -->

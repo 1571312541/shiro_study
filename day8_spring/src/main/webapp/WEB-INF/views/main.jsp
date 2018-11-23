@@ -6,12 +6,12 @@
 </head>
 <body>
 
-欢迎【<shiro:principal property="username"></shiro:principal>】光临 <a href="/logout">注销</a> <a href="/reload">重新加载权限</a><br>
-<shiro:hasPermission name="employee:list">
-<a href="/employee">员工列表</a><br>
-</shiro:hasPermission>
-<shiro:hasPermission name="deptment:list">
-<a href="/department">部门列表</a><br>
-</shiro:hasPermission>
+欢迎【<shiro:principal property="username"></shiro:principal>,<shiro:principal property="password"></shiro:principal>】光临 <a href="/logout">注销</a> <a href="/reload">重新加载权限</a><br>
+    <shiro:hasPermission name="employee:list">
+         <a href="/employee">员工列表</a><br>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="deptment:list">
+         <a href="/department">部门列表</a><br>
+    </shiro:hasPermission>
 </body>
 </html>
